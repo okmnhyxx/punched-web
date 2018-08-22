@@ -135,6 +135,9 @@ const proxy = {
       path: '/base/category/list',
     });
   },
+
+  'GET /sys/*': 'http://localhost:8030/punch/',
+  'POST /sys/*': 'http://localhost:8030/punch/',
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
