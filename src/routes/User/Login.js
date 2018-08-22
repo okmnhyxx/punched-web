@@ -4,6 +4,7 @@ import { Link } from 'dva/router';
 import { Checkbox, Alert, Icon } from 'antd';
 import Login from 'components/Login';
 import styles from './Login.less';
+import { getAuthority } from '../../utils/authority';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
@@ -16,6 +17,13 @@ export default class LoginPage extends Component {
     type: 'account',
     autoLogin: true,
   };
+
+  componentDidMount() {
+    const { history } = this.props;
+    if (getAuthority() !== 'guest') {
+      history.push("/");
+    }
+  }
 
   onTabChange = type => {
     this.setState({ type });
@@ -56,35 +64,35 @@ export default class LoginPage extends Component {
               login.type === 'account' &&
               !submitting &&
               this.renderMessage('账户或密码错误（admin/888888）')}
-            <UserName name="userName" placeholder="admin/user" />
+            <UserName name="userName" placeholder="admin/emi" />
             <Password name="password" placeholder="888888/123456" />
           </Tab>
-          <Tab key="mobile" tab="手机号登录">
-            {login.status === 'error' &&
-              login.type === 'mobile' &&
-              !submitting &&
-              this.renderMessage('验证码错误')}
-            <Mobile name="mobile" />
-            <Captcha name="captcha" />
-          </Tab>
+          {/*<Tab key="mobile" tab="手机号登录">*/}
+            {/*{login.status === 'error' &&*/}
+              {/*login.type === 'mobile' &&*/}
+              {/*!submitting &&*/}
+              {/*this.renderMessage('验证码错误')}*/}
+            {/*<Mobile name="mobile" />*/}
+            {/*<Captcha name="captcha" />*/}
+          {/*</Tab>*/}
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
               自动登录
             </Checkbox>
-            <a style={{ float: 'right' }} href="">
-              忘记密码
-            </a>
+            {/*<a style={{ float: 'right' }} href="">*/}
+              {/*忘记密码*/}
+            {/*</a>*/}
           </div>
           <Submit loading={submitting}>登录</Submit>
-          <div className={styles.other}>
-            其他登录方式
-            <Icon className={styles.icon} type="alipay-circle" />
-            <Icon className={styles.icon} type="taobao-circle" />
-            <Icon className={styles.icon} type="weibo-circle" />
-            <Link className={styles.register} to="/user/register">
-              注册账户
-            </Link>
-          </div>
+          {/*<div className={styles.other}>*/}
+            {/*其他登录方式*/}
+            {/*<Icon className={styles.icon} type="alipay-circle" />*/}
+            {/*<Icon className={styles.icon} type="taobao-circle" />*/}
+            {/*<Icon className={styles.icon} type="weibo-circle" />*/}
+            {/*<Link className={styles.register} to="/user/register">*/}
+              {/*注册账户*/}
+            {/*</Link>*/}
+          {/*</div>*/}
         </Login>
       </div>
     );

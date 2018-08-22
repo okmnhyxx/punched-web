@@ -5,18 +5,22 @@ const menuData = [
     name: 'dashboard',
     icon: 'dashboard',
     path: 'dashboard',
+    authority: ['admin','user'],
     children: [
       {
         name: '分析页',
         path: 'analysis',
+        authority: ['admin','user'],
       },
       {
         name: '监控页',
         path: 'monitor',
+        authority: ['admin','user'],
       },
       {
         name: '工作台',
         path: 'workplace',
+        authority: ['admin','user'],
         // hideInBreadcrumb: true,
         // hideInMenu: true,
       },
@@ -26,19 +30,22 @@ const menuData = [
     name: '表单页',
     icon: 'form',
     path: 'form',
+    authority: ['admin','user'],
     children: [
       {
         name: '基础表单',
         path: 'basic-form',
+        authority: ['admin','user'],
       },
       {
         name: '分步表单',
         path: 'step-form',
+        authority: ['admin','user'],
       },
       {
         name: '高级表单',
-        authority: 'admin',
         path: 'advanced-form',
+        authority: ['admin','user'],
       },
     ],
   },
@@ -83,10 +90,12 @@ const menuData = [
     name: '详情页',
     icon: 'profile',
     path: 'profile',
+    authority: ['admin','user'],
     children: [
       {
         name: '基础详情页',
         path: 'basic',
+        authority: ['admin','user'],
       },
       {
         name: '高级详情页',
@@ -99,14 +108,17 @@ const menuData = [
     name: '结果页',
     icon: 'check-circle-o',
     path: 'result',
+    authority: ['admin','user'],
     children: [
       {
         name: '成功',
         path: 'success',
+        authority: ['admin','user'],
       },
       {
         name: '失败',
         path: 'fail',
+        authority: ['admin','user'],
       },
     ],
   },
@@ -143,6 +155,7 @@ const menuData = [
       {
         name: '登录',
         path: 'login',
+        authority: 'guest',
       },
       {
         name: '注册',
@@ -151,6 +164,62 @@ const menuData = [
       {
         name: '注册结果',
         path: 'register-result',
+      },
+    ],
+  },
+  {
+    name: '用户模块',
+    path: 'member',
+    authority: ['admin','user'],
+    children: [
+      {
+        name: '用户列表',
+        path: 'member-list',
+        authority: ['admin','user'],
+      },
+      {
+        name: '打卡列表',
+        path: 'punch-list',
+        authority: ['admin','user'],
+      },
+    ],
+  },
+  {
+    name: '习惯模块',
+    path: 'habit',
+    authority: ['admin','user'],
+    children: [
+      {
+        name: '习惯列表',
+        path: 'habit-list',
+        authority: ['admin','user'],
+      },
+      {
+        name: '新增习惯',
+        path: 'habit-modify',
+        authority: ['admin','user'],
+      },
+    ],
+  },
+  {
+    name: '渠道模块',
+    path: 'channel',
+    authority: ['admin','user'],
+    children: [
+      {
+        name: '渠道列表',
+        path: 'channel-list',
+        authority: ['admin','user'],
+      },
+      {
+        name: '新增渠道',
+        path: 'channel-create',
+        authority: ['admin','user'],
+      },
+      {
+        name: '修改渠道',
+        path: 'channel-modify',
+        authority: ['admin','user'],
       },
     ],
   },

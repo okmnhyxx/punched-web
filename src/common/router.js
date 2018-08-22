@@ -193,6 +193,27 @@ export const getRouterData = app => {
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
+    '/member/member-list': {
+      component: dynamicWrapper(app, ['member'], () => import('../routes/Member/MemberList')),
+    },
+    '/member/punch-list': {
+      component: dynamicWrapper(app, ['member'], () => import('../routes/Member/PunchList')),
+    },
+    '/habit/habit-list': {
+      component: dynamicWrapper(app, ['habit'], () => import('../routes/Habit/HabitList')),
+    },
+    '/habit/habit-modify': {
+      component: dynamicWrapper(app, ['habit'], () => import('../routes/Habit/HabitModify')),
+    },
+    '/channel/channel-list': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/ChannelList')),
+    },
+    '/channel/channel-create': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/ChannelCreate')),
+    },
+    '/channel/channel-modify': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/ChannelModify')),
+    },
   };
   // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());

@@ -1,7 +1,8 @@
 import fetch from 'dva/fetch';
-import { notification } from 'antd';
+import { notification, message } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
+import Error from '../routes/Result/Error';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -20,6 +21,7 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -34,6 +36,26 @@ function checkStatus(response) {
   error.response = response;
   throw error;
 }
+
+// function checkSuccess(response) {
+//   const bodyJson = response.text();
+//   console.log(bodyJson);
+//   const bodyData = JSON.parse(bodyJson);
+//   console.log(bodyData);
+//   if (bodyData.success) {
+//     return response;
+//   } else {
+//     const errortext = response.data.errorMsg;
+//     notification.error({
+//       message: `返回错误 ${response.status}: ${response.url}`,
+//       description: errortext,
+//     });
+//     const error = new Error(errortext);
+//     error.name = response.data.errorCode;
+//     error.response = response;
+//     throw error;
+//   }
+// }
 
 /**
  * Requests a URL, returning a promise.
@@ -53,12 +75,23 @@ export default function request(url, options) {
     newOptions.method === 'DELETE'
   ) {
     if (!(newOptions.body instanceof FormData)) {
-      newOptions.headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-        ...newOptions.headers,
-      };
-      newOptions.body = JSON.stringify(newOptions.body);
+
+      if (newOptions.type === 'form') {
+        newOptions.headers = {
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          ...newOptions.headers,
+        };
+        console.log(" --- request: newOptions.body", newOptions.body);
+      } else {
+        newOptions.headers = {
+          Accept: 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+          ...newOptions.headers,
+        };
+        newOptions.body = JSON.stringify(newOptions.body);
+      }
+
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
@@ -74,7 +107,14 @@ export default function request(url, options) {
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
-      return response.json();
+      const resp = response.json();
+      // if (!resp.success) {
+      //   const error = new Error(resp.errorMsg);
+      //   error.name = response.status;
+      //   error.response = response;
+      //   throw error;
+      // }
+      return resp;
     })
     .catch(e => {
       const { dispatch } = store;
@@ -93,8 +133,26 @@ export default function request(url, options) {
         dispatch(routerRedux.push('/exception/500'));
         return;
       }
+      // if (status === 200) {
+      //   dispatch(routerRedux.push('/exception/500'));
+      //   return;
+      // }
       if (status >= 404 && status < 422) {
         dispatch(routerRedux.push('/exception/404'));
       }
     });
+
+}
+
+
+export function checkHasError(response) {
+
+  if (!response.success) {
+    const { dispatch } = store;
+    message.error(response.errorMsg);
+    dispatch(routerRedux.push('/exception/500'));
+    return true;
+  } else {
+    return false;
+  }
 }
