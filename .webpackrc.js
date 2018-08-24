@@ -26,4 +26,11 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  proxy: {
+    "/sys": {
+      "target": "http://localhost:8030/punch",
+      "changeOrigin": true,
+      "pathRewrite": { "^/sys" : "/sys" }
+    }
+  },
 };

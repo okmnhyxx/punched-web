@@ -11,6 +11,7 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    "dot-notation": ["warn", { "allowKeywords": true }],
     'generator-star-spacing': [0],
     'consistent-return': [0],
     'react/forbid-prop-types': [0],

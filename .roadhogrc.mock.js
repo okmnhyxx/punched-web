@@ -9,6 +9,7 @@ import { format, delay } from 'roadhog-api-doc';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
+console.log(" --- noProxy: ", noProxy);
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
@@ -138,6 +139,12 @@ const proxy = {
 
   'GET /sys/*': 'http://localhost:8030/punch/',
   'POST /sys/*': 'http://localhost:8030/punch/',
+
+  // 'GET /sys/anchors/*': 'http://localhost:8025/anchor/',
+  // 'POST /sys/anchors/*': 'http://localhost:8025/anchor/',
+
+  // 'GET /sys/anchors/*': 'https://www.yinxiang.nayutatech.com/anchor/',
+  // 'POST /sys/anchors/*': 'https://www.yinxiang.nayutatech.com/anchor/',
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
