@@ -27,7 +27,7 @@ export default {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
-        if (redirect) {
+        if (redirect && redirect !== "/") {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
@@ -51,6 +51,7 @@ export default {
         },
       });
       reloadAuthorized();
+      console.log(" --- window.location.href: ")
       yield put(
         routerRedux.push({
           pathname: '/user/login',
@@ -73,13 +74,18 @@ export default {
         },
       });
 
+      // Login successfully
       if (response.success) {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
-        if (redirect) {
+        console.log(" --- urlParams: ", urlParams);
+        console.log(" --- params: ", params);
+        console.log(" --- redirect: ", redirect);
+        if (redirect && redirect !== "/") {
           const redirectUrlParams = new URL(redirect);
+          console.log(" --- new URL(redirect)", new URL(redirect));
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
             if (redirect.startsWith('/#')) {
