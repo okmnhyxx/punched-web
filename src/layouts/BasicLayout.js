@@ -192,7 +192,7 @@ export default class BasicLayout extends React.PureComponent {
     }
     if (key === 'logout') {
       dispatch({
-        type: 'login/logout',
+        type: 'login/doLogout',
       });
     }
   };

@@ -28,7 +28,7 @@ export default {
   hash: true,
   proxy: {
     "/sys": {
-      "target": "http://localhost:8030/punch",
+      "target": "http://localhost:8030/punched",
       "changeOrigin": true,
       "pathRewrite": { "^/sys" : "/sys" }
     }

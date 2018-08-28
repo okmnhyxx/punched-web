@@ -27,6 +27,8 @@ app.router(require('./router').default);
 // 5. Start
 app.start('#root');
 
-setAuthority("guest");
+setAuthority("admin");
+// localStorage.setItem("defaultCurrentPage", "10");
+// localStorage.setItem("defaultPageSize", "10");
 
 export default app._store; // eslint-disable-line

@@ -220,6 +220,38 @@ const menuData = [
         name: '修改渠道',
         path: 'channel-modify',
         authority: ['admin','user'],
+        hideInMenu: true,  // 隐藏该条
+      },
+    ],
+  },
+  {
+    name: '主播模块',
+    path: 'anchor',
+    authority: ['admin','user'],
+    children: [
+      {
+        name: '主播列表',
+        path: 'anchor-list',
+        authority: ['admin','user'],
+      },
+      {
+        name: '修改主播信息',
+        path: 'anchor-modify',
+        authority: ['admin','user'],
+      },
+    ],
+  },
+  {
+    name: '视频模块',
+    path: 'video',
+    children: [
+      {
+        name: '视频列表',
+        path: 'video-list',
+      },
+      {
+        name: '修改视频信息',
+        path: 'video-modify',
       },
     ],
   },

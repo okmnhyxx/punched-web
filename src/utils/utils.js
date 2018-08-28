@@ -182,5 +182,33 @@ export function isUrl(path) {
 }
 
 export function isNullOrUndefined(obj) {
-  return typeof obj === "undefined" || obj === null;
+  return typeof obj === "undefined" || obj === null || obj === "";
+}
+
+// export const defaultCurrentPage = 1;
+// export const defaultPageSize = 10;
+export function fetchDefaultPaginationItem() {
+  return {
+    pageSize : 10,
+    current: 1,
+  };
+}
+
+export function fetchQueryString(name){
+  const regStr = new RegExp(`(^|&)${name}=([^&]*)(&|$)`);
+  // const r = window.location.search.substr(1).match(regStr);
+  const hashArr = window.location.hash.split("?");
+  if (hashArr.length <= 1) {
+    return "";
+  }
+  const match = hashArr[1].match(regStr);
+
+  if (match !== null) {
+    return unescape(match[2]);
+  }
+  return "";
+  // const r = window.location.hash.split("?")[1].substr(1).match(regStr);
+  // if(r!=null) {
+  //   return  unescape(r[2]);
+  // }
 }

@@ -1,5 +1,5 @@
 import fetch from 'dva/fetch';
-import { notification, message } from 'antd';
+import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
 import Error from '../routes/Result/Error';
@@ -36,26 +36,6 @@ function checkStatus(response) {
   error.response = response;
   throw error;
 }
-
-// function checkSuccess(response) {
-//   const bodyJson = response.text();
-//   console.log(bodyJson);
-//   const bodyData = JSON.parse(bodyJson);
-//   console.log(bodyData);
-//   if (bodyData.success) {
-//     return response;
-//   } else {
-//     const errortext = response.data.errorMsg;
-//     notification.error({
-//       message: `返回错误 ${response.status}: ${response.url}`,
-//       description: errortext,
-//     });
-//     const error = new Error(errortext);
-//     error.name = response.data.errorCode;
-//     error.response = response;
-//     throw error;
-//   }
-// }
 
 /**
  * Requests a URL, returning a promise.
@@ -121,7 +101,7 @@ export default function request(url, options) {
       const status = e.name;
       if (status === 401) {
         dispatch({
-          type: 'login/logout',
+          type: 'login/doLogout',
         });
         return;
       }
@@ -148,9 +128,15 @@ export default function request(url, options) {
 export function checkHasError(response) {
 
   if (!response.success) {
-    const { dispatch } = store;
-    message.error(response.errorMsg);
-    dispatch(routerRedux.push('/exception/500'));
+    // const { dispatch } = store;
+    // message.error(response.errorMsg);
+    const args = {
+      message: `错误码${response.errorCode}`,
+      description: response.errorMsg,
+      duration: 9,
+    };
+    notification.error(args);
+    // dispatch(routerRedux.push('/exception/500'));
     return true;
   } else {
     return false;

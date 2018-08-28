@@ -137,8 +137,8 @@ const proxy = {
     });
   },
 
-  'GET /sys/*': 'http://localhost:8030/punch/',
-  'POST /sys/*': 'http://localhost:8030/punch/',
+  'GET /sys/*': 'http://localhost:8030/punched/',
+  'POST /sys/*': 'http://localhost:8030/punched/',
 
   // 'GET /sys/anchors/*': 'http://localhost:8025/anchor/',
   // 'POST /sys/anchors/*': 'http://localhost:8025/anchor/',

@@ -197,7 +197,7 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['member'], () => import('../routes/Member/MemberList')),
     },
     '/member/punch-list': {
-      component: dynamicWrapper(app, ['member'], () => import('../routes/Member/PunchList')),
+      component: dynamicWrapper(app, ['punch'], () => import('../routes/Member/PunchList')),
     },
     '/habit/habit-list': {
       component: dynamicWrapper(app, ['habit'], () => import('../routes/Habit/HabitList')),
@@ -213,6 +213,18 @@ export const getRouterData = app => {
     },
     '/channel/channel-modify': {
       component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/ChannelModify')),
+    },
+    '/anchor/anchor-list': {
+      component: dynamicWrapper(app, ['anchor'], () => import('../routes/Anchor/AnchorList')),
+    },
+    '/anchor/anchor-modify': {
+      component: dynamicWrapper(app, ['anchor'], () => import('../routes/Anchor/AnchorModify')),
+    },
+    '/video/video-list': {
+      component: dynamicWrapper(app, ['video'], () => import('../routes/Video/VideoList')),
+    },
+    '/video/video-modify': {
+      component: dynamicWrapper(app, ['video'], () => import('../routes/Video/VideoModify')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

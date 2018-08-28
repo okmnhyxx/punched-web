@@ -10,7 +10,7 @@ const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
 
 @connect(({ login, loading }) => ({
   login,
-  submitting: loading.effects['login/login'],
+  submitting: loading.effects['login/doLogin'],
 }))
 export default class LoginPage extends Component {
   state = {
@@ -34,7 +34,7 @@ export default class LoginPage extends Component {
     const { dispatch } = this.props;
     if (!err) {
       dispatch({
-        type: 'login/login',
+        type: 'login/doLogin',
         payload: {
           ...values,
           type,
