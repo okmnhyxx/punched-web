@@ -91,8 +91,8 @@ enquireScreen(b => {
 @connect(({ user, global = {}, loading }) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
-  fetchingNotices: loading.effects['global/fetchNotices'],
-  notices: global.notices,
+  // fetchingNotices: loading.effects['global/fetchNotices'],
+  // notices: global.notices,
 }))
 export default class BasicLayout extends React.PureComponent {
   static childContextTypes = {
@@ -118,10 +118,10 @@ export default class BasicLayout extends React.PureComponent {
         isMobile: mobile,
       });
     });
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'user/fetchCurrent',
-    });
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'user/fetchCurrent',
+    // });
   }
 
   componentWillUnmount() {
@@ -131,7 +131,7 @@ export default class BasicLayout extends React.PureComponent {
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
-    let title = 'Ant Design Pro';
+    let title = '打卡系统';
     let currRouterData = null;
     // match params path
     for (const key in routerData) {
@@ -141,7 +141,7 @@ export default class BasicLayout extends React.PureComponent {
       }
     }
     if (currRouterData && currRouterData.name) {
-      title = `${currRouterData.name} - Ant Design Pro`;
+      title = `${currRouterData.name} - 打卡系统`;
     }
     return title;
   }
@@ -175,14 +175,14 @@ export default class BasicLayout extends React.PureComponent {
     });
   };
 
-  handleNoticeClear = type => {
-    message.success(`清空了${type}`);
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'global/clearNotices',
-      payload: type,
-    });
-  };
+  // handleNoticeClear = type => {
+  //   message.success(`清空了${type}`);
+  //   const { dispatch } = this.props;
+  //   dispatch({
+  //     type: 'global/clearNotices',
+  //     payload: type,
+  //   });
+  // };
 
   handleMenuClick = ({ key }) => {
     const { dispatch } = this.props;
@@ -197,21 +197,21 @@ export default class BasicLayout extends React.PureComponent {
     }
   };
 
-  handleNoticeVisibleChange = visible => {
-    const { dispatch } = this.props;
-    if (visible) {
-      dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
-  };
+  // handleNoticeVisibleChange = visible => {
+  //   const { dispatch } = this.props;
+  //   if (visible) {
+  //     dispatch({
+  //       type: 'global/fetchNotices',
+  //     });
+  //   }
+  // };
 
   render() {
     const {
       currentUser,
       collapsed,
-      fetchingNotices,
-      notices,
+      // fetchingNotices,
+      // notices,
       routerData,
       match,
       location,
@@ -237,14 +237,14 @@ export default class BasicLayout extends React.PureComponent {
             <GlobalHeader
               logo={logo}
               currentUser={currentUser}
-              fetchingNotices={fetchingNotices}
-              notices={notices}
+              // fetchingNotices={fetchingNotices}
+              // notices={notices}
               collapsed={collapsed}
               isMobile={mb}
-              onNoticeClear={this.handleNoticeClear}
+              // onNoticeClear={this.handleNoticeClear}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
-              onNoticeVisibleChange={this.handleNoticeVisibleChange}
+              // onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>

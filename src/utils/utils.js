@@ -166,6 +166,16 @@ export function getPageQuery() {
   return parse(window.location.href.split('?')[1]);
 }
 
+export function getPageHash(url) {
+  if (isNullOrUndefined(url)) {
+    return "";
+  }
+  const pageHash = url.split('#')[1];
+  // console.log(" --- pageHash: ", pageHash);
+  // console.log(" --- pageHash: ", url.split('#/')[1]);
+  return isNullOrUndefined(pageHash) ? "" : pageHash;
+}
+
 export function getQueryPath(path = '', query = {}) {
   const search = stringify(query);
   if (search.length) {
@@ -182,7 +192,7 @@ export function isUrl(path) {
 }
 
 export function isNullOrUndefined(obj) {
-  return typeof obj === "undefined" || obj === null || obj === "";
+  return typeof obj === "undefined" || obj === null || obj === "" || obj === "undefined";
 }
 
 // export const defaultCurrentPage = 1;

@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
+import { getRoutes, getPageQuery, getQueryPath, getPageHash } from '../utils/utils';
 
 const links = [
   {
@@ -34,8 +34,9 @@ const copyright = (
 function getLoginPathWithRedirectPath() {
   const params = getPageQuery();
   const { redirect } = params;
+  console.log(" --- pageHash: ", getPageHash(redirect));
   return getQueryPath('/user/login', {
-    redirect,
+    redirect: getPageHash(redirect),
   });
 }
 
@@ -43,9 +44,9 @@ class UserLayout extends React.PureComponent {
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
-    let title = 'Ant Design Pro';
+    let title = '打卡授权';
     if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - Ant Design Pro`;
+      title = `${routerData[pathname].name} - 打卡 - 授权`;
     }
     return title;
   }
@@ -60,10 +61,10 @@ class UserLayout extends React.PureComponent {
               <div className={styles.header}>
                 <Link to="/">
                   <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>Ant Design</span>
+                  <span className={styles.title}>登陆打卡系统</span>
                 </Link>
               </div>
-              <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+              <div className={styles.desc}>A打卡系统 是nayouta公司某产品的后台管理系统</div>
             </div>
             <Switch>
               {getRoutes(match.path, routerData).map(item => (

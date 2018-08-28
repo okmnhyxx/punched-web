@@ -13,37 +13,37 @@ export default class GlobalHeader extends PureComponent {
     this.triggerResizeEvent.cancel();
   }
 
-  getNoticeData() {
-    const { notices } = this.props;
-    if (notices == null || notices.length === 0) {
-      return {};
-    }
-    const newNotices = notices.map(notice => {
-      const newNotice = { ...notice };
-      if (newNotice.datetime) {
-        newNotice.datetime = moment(notice.datetime).fromNow();
-      }
-      // transform id to item key
-      if (newNotice.id) {
-        newNotice.key = newNotice.id;
-      }
-      if (newNotice.extra && newNotice.status) {
-        const color = {
-          todo: '',
-          processing: 'blue',
-          urgent: 'red',
-          doing: 'gold',
-        }[newNotice.status];
-        newNotice.extra = (
-          <Tag color={color} style={{ marginRight: 0 }}>
-            {newNotice.extra}
-          </Tag>
-        );
-      }
-      return newNotice;
-    });
-    return groupBy(newNotices, 'type');
-  }
+  // getNoticeData() {
+  //   const { notices } = this.props;
+  //   if (notices == null || notices.length === 0) {
+  //     return {};
+  //   }
+  //   const newNotices = notices.map(notice => {
+  //     const newNotice = { ...notice };
+  //     if (newNotice.datetime) {
+  //       newNotice.datetime = moment(notice.datetime).fromNow();
+  //     }
+  //     // transform id to item key
+  //     if (newNotice.id) {
+  //       newNotice.key = newNotice.id;
+  //     }
+  //     if (newNotice.extra && newNotice.status) {
+  //       const color = {
+  //         todo: '',
+  //         processing: 'blue',
+  //         urgent: 'red',
+  //         doing: 'gold',
+  //       }[newNotice.status];
+  //       newNotice.extra = (
+  //         <Tag color={color} style={{ marginRight: 0 }}>
+  //           {newNotice.extra}
+  //         </Tag>
+  //       );
+  //     }
+  //     return newNotice;
+  //   });
+  //   return groupBy(newNotices, 'type');
+  // }
 
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
@@ -61,12 +61,12 @@ export default class GlobalHeader extends PureComponent {
     const {
       currentUser = {},
       collapsed,
-      fetchingNotices,
+      // fetchingNotices,
       isMobile,
       logo,
-      onNoticeVisibleChange,
+      // onNoticeVisibleChange,
       onMenuClick,
-      onNoticeClear,
+      // onNoticeClear,
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -85,7 +85,7 @@ export default class GlobalHeader extends PureComponent {
         </Menu.Item>
       </Menu>
     );
-    const noticeData = this.getNoticeData();
+    // const noticeData = this.getNoticeData();
     return (
       <div className={styles.header}>
         {isMobile && [
@@ -121,36 +121,36 @@ export default class GlobalHeader extends PureComponent {
               <Icon type="question-circle-o" />
             </a>
           </Tooltip>
-          <NoticeIcon
-            className={styles.action}
-            count={currentUser.notifyCount}
-            onItemClick={(item, tabProps) => {
-              console.log(item, tabProps); // eslint-disable-line
-            }}
-            onClear={onNoticeClear}
-            onPopupVisibleChange={onNoticeVisibleChange}
-            loading={fetchingNotices}
-            popupAlign={{ offset: [20, -16] }}
-          >
-            <NoticeIcon.Tab
-              list={noticeData['通知']}
-              title="通知"
-              emptyText="你已查看所有通知"
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-            />
-            <NoticeIcon.Tab
-              list={noticeData['消息']}
-              title="消息"
-              emptyText="您已读完所有消息"
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-            />
-            <NoticeIcon.Tab
-              list={noticeData['待办']}
-              title="待办"
-              emptyText="你已完成所有待办"
-              emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-            />
-          </NoticeIcon>
+          {/*<NoticeIcon*/}
+            {/*className={styles.action}*/}
+            {/*count={currentUser.notifyCount}*/}
+            {/*onItemClick={(item, tabProps) => {*/}
+              {/*console.log(item, tabProps); // eslint-disable-line*/}
+            {/*}}*/}
+            {/*onClear={onNoticeClear}*/}
+            {/*onPopupVisibleChange={onNoticeVisibleChange}*/}
+            {/*loading={fetchingNotices}*/}
+            {/*popupAlign={{ offset: [20, -16] }}*/}
+          {/*>*/}
+            {/*<NoticeIcon.Tab*/}
+              {/*list={noticeData['通知']}*/}
+              {/*title="通知"*/}
+              {/*emptyText="你已查看所有通知"*/}
+              {/*emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"*/}
+            {/*/>*/}
+            {/*<NoticeIcon.Tab*/}
+              {/*list={noticeData['消息']}*/}
+              {/*title="消息"*/}
+              {/*emptyText="您已读完所有消息"*/}
+              {/*emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"*/}
+            {/*/>*/}
+            {/*<NoticeIcon.Tab*/}
+              {/*list={noticeData['待办']}*/}
+              {/*title="待办"*/}
+              {/*emptyText="你已完成所有待办"*/}
+              {/*emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"*/}
+            {/*/>*/}
+          {/*</NoticeIcon>*/}
           {currentUser.name ? (
             <Dropdown overlay={menu}>
               <span className={`${styles.action} ${styles.account}`}>

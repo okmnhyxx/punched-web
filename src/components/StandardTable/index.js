@@ -73,10 +73,24 @@ class StandardTable extends PureComponent {
       rowKey,
     } = this.props;
 
+    const range2 = (total, size) => {
+      const range = [];
+      if (total === 0) {
+        range[0] = 0;
+        range[1] = 0;
+      } else {
+        range[0] = 1;
+        range[1] = Math.ceil(total / size);
+      }
+      return range;
+    };
+
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
       ...pagination,
+      range: range2,
+      showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
     };
 
     const rowSelection = {
@@ -124,6 +138,18 @@ class StandardTable extends PureComponent {
       </div>
     );
   }
+
+  // fetchRange = (total, size) => {
+  //   const range = [];
+  //   if (total === 0) {
+  //     range[0] = 0;
+  //     range[1] = 0;
+  //   } else {
+  //     range[0] = 1;
+  //     range[1] = Math.ceil(total / size);
+  //   }
+  //   return range;
+  // }
 }
 
 export default StandardTable;

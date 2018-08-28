@@ -5,7 +5,12 @@ export default {
 
   state: {
     list: [],
-    currentUser: {},
+    currentUser: {
+      name: 'admin',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      userid: '00000001',
+      notifyCount: 12,
+    },
   },
 
   effects: {
@@ -16,13 +21,13 @@ export default {
         payload: response,
       });
     },
-    *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
-      yield put({
-        type: 'saveCurrentUser',
-        payload: response,
-      });
-    },
+    // *fetchCurrent(_, { call, put }) {
+    //   const response = yield call(queryCurrent);
+    //   yield put({
+    //     type: 'saveCurrentUser',
+    //     payload: response,
+    //   });
+    // },
   },
 
   reducers: {
@@ -32,20 +37,20 @@ export default {
         list: action.payload,
       };
     },
-    saveCurrentUser(state, action) {
-      return {
-        ...state,
-        currentUser: action.payload || {},
-      };
-    },
-    changeNotifyCount(state, action) {
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          notifyCount: action.payload,
-        },
-      };
-    },
+    // saveCurrentUser(state, action) {
+    //   return {
+    //     ...state,
+    //     currentUser: action.payload || {},
+    //   };
+    // },
+    // changeNotifyCount(state, action) {
+    //   return {
+    //     ...state,
+    //     currentUser: {
+    //       ...state.currentUser,
+    //       notifyCount: action.payload,
+    //     },
+    //   };
+    // },
   },
 };

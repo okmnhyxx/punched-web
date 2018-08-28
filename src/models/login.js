@@ -103,11 +103,13 @@ export default {
         },
       });
       reloadAuthorized();
+      console.log(" --- window.location.href: ", window.location.href);
       yield put(
         routerRedux.push({
           pathname: '/user/login',
           search: stringify({
-            redirect: window.location.href,
+            // redirect: window.location.href,
+            redirect: window.location.hash,
           }),
         })
       );
