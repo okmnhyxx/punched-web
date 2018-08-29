@@ -7,18 +7,18 @@ export async function queryChannelList(params) {
   console.log(" --- JSON.stringify(params): ", JSON.stringify(params));
   console.log(" --- stringify(params): ", stringify(params));
 
-  return request(`/sys/channel/list?${stringify(params)}&times=${new Date().getTime()}`);
+  return request(`/punched/sys/channel/list?${stringify(params)}&times=${new Date().getTime()}`);
 }
 
 export async function queryChannelInfo(params) {
   console.log(" --- params: ", params );
-  return request(`/sys/channel/${params}?times=${new Date().getTime()}`);
+  return request(`/punched/sys/channel/${params}?times=${new Date().getTime()}`);
 }
 
 
 export async function deleteChannel(ids) {
   const idsStr = ids.ids;
-  return request(`/sys/channel/drop?ids=${idsStr}`, {
+  return request(`/punched/sys/channel/drop?ids=${idsStr}`, {
     method: 'POST',
     body: `ids2=${idsStr}`,
     type: 'form',
@@ -26,7 +26,7 @@ export async function deleteChannel(ids) {
 }
 
 export async function activeChannel(id) {
-  return request(`/sys/channel/active/${id}`, {
+  return request(`/punched/sys/channel/active/${id}`, {
     method: 'POST',
   });
 }
@@ -34,7 +34,7 @@ export async function activeChannel(id) {
 export async function submitChannelForm(payload) {
   const { channelId } = payload;
 
-  return request(`/sys/channel/modify/${channelId}`, {
+  return request(`/punched/sys/channel/modify/${channelId}`, {
     method: 'POST',
     body: payload.values,
   });
@@ -44,8 +44,8 @@ export async function submitChannelForm(payload) {
 export async function createChannel(payload) {
   console.log(" --- createChannel.payload: ", payload);
   console.log(" --- stringify(payload.values): ", stringify(payload.values));
-  return request(`/sys/channel`, {
-  // return request(`/sys/channel?${stringify(payload.values)}`, {
+  return request(`/punched/sys/channel`, {
+  // return request(`/punched/sys/channel?${stringify(payload.values)}`, {
     method: 'POST',
     body: stringify(payload.values),
     type: 'form',
@@ -54,6 +54,6 @@ export async function createChannel(payload) {
 
 export async function checkChannelName(payload) {
 
-  return request(`/sys/channel/name/checking?${stringify(payload)}`);
+  return request(`/punched/sys/channel/name/checking?${stringify(payload)}`);
 }
 

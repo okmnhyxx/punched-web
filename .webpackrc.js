@@ -27,10 +27,10 @@ export default {
   publicPath: '/',
   hash: true,
   proxy: {
-    "/sys": {
-      "target": "http://localhost:8030/punched",
+    "/punched/sys": {
+      "target": "http://localhost:8030",
       "changeOrigin": true,
-      "pathRewrite": { "^/sys" : "/sys" }
+      "pathRewrite": { "^/punched/sys" : "/punched/sys" }
     }
   },
 };
