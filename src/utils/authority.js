@@ -3,7 +3,7 @@ import { isNullOrUndefined } from './utils';
 
 export function getAuthority() {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
-  const auth = isNullOrUndefined(localStorage.getItem('antd-pro-authority')) ? 'guest' : localStorage.getItem('antd-pro-authority');
+  const auth = isNullOrUndefined(localStorage.getItem('antd-pro-authority')) ? 'admin' : localStorage.getItem('antd-pro-authority');
   console.log(" --- getAuthority: ", auth);
   return auth;
   // return localStorage.getItem('antd-pro-authority') || 'admin';

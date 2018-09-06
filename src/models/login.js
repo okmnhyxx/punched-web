@@ -4,7 +4,7 @@ import { fakeAccountLogin } from '../services/api';
 import { doLogin } from '../services/api-login';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
-import { getPageQuery } from '../utils/utils';
+import { getPageQuery, isNullOrUndefined } from '../utils/utils';
 
 export default {
   namespace: 'login',
@@ -84,11 +84,12 @@ export default {
         console.log(" --- params: ", params);
         console.log(" --- redirect: ", redirect);
         if (redirect && redirect !== "/") {
+          redirect = (redirect.startsWith("/") && redirect !== "/" ? `#${redirect}` : redirect);
           const redirectUrlParams = new URL(redirect);
-          console.log(" --- new URL(redirect)", new URL(redirect));
+          console.log(" --- new URL(redirect)", redirectUrlParams);
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
-            if (redirect.startsWith('/#')) {
+            if (redirect.startsWith('/#/')) {
               redirect = redirect.substr(2);
             }
           } else {

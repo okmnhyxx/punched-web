@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes, getPageQuery, getQueryPath, getPageHash } from '../utils/utils';
+import { getRoutes, getPageQuery, getQueryPath, getPageHash, isNullOrUndefined } from '../utils/utils';
 
 const links = [
   {
@@ -34,6 +34,7 @@ const copyright = (
 function getLoginPathWithRedirectPath() {
   const params = getPageQuery();
   const { redirect } = params;
+  // redirect = isNullOrUndefined(redirect) ? redirect : (redirect.startsWith("/") && redirect !== "/" ? `#${redirect}` : redirect);
   console.log(" --- pageHash: ", getPageHash(redirect));
   return getQueryPath('/user/login', {
     redirect: getPageHash(redirect),

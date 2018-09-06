@@ -9,7 +9,8 @@ import 'moment/locale/zh-cn';
 import './rollbar';
 
 import './index.less';
-import { setAuthority } from './utils/authority';
+// import { setAuthority } from './utils/authority';
+
 // 1. Initialize
 const app = dva({
   history: createHistory(),
@@ -27,7 +28,7 @@ app.router(require('./router').default);
 // 5. Start
 app.start('#root');
 
-console.log(" --- setAuthority(\"guest\")");
-setAuthority("guest");
+// console.log(" --- setAuthority(\"guest\")");
+// setAuthority("guest");
 
 export default app._store; // eslint-disable-line
